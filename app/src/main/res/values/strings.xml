@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WordBook</string>
+    <string name="action_settings">Settings</string>
+    <string name="deck_text">デッキ：</string>
+    <string name="title_text" translatable="false">用語： (表) 最初に読むテキスト</string>
+    <string name="detail_text" translatable="false">解説： (裏) 次に読むテキスト</string>
+    <string name="delete_title">削除</string>
+    <string name="save_text" translatable="false">登録</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

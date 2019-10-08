@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontColor DeepSkyBlue
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+
+database Realm order 30
+PlayView -> PlayFragment: データ呼び出し
+PlayFragment -> CardAdapter:
+CardAdapter -> Realm:データ照会
+Realm --> CardAdapter:返り値
+CardAdapter -> PlayFragment: title,detailを返す
+PlayFragment -> PlayView: 画面表示
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+title: U1010 用語追加 シーケンス図 (基本フロー）
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontColor DeepSkyBlue
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+actor ユーザー
+
+ユーザー -> MainActivity:「+」を選択する
+activate MainActivity
+MainActivity ->EditActivity :呼び出し
+activate EditActivity
+EditActivity --> MainActivity:
+MainActivity --> ユーザー:「カード入力画面 表」を表示
+
+
+
+ユーザー -> Card: 「用語」欄にテキストを入力 + Enter
+note right
+制約：「用語」はString型で半角100文字以内
+「解説」はString型で半角500文字までとする
+end note
+activate Card
+MainActivity --> ユーザー:「カード入力画面 裏」を表示
+ユーザー -> Card: 「解説」欄にテキストを入力 　+ 「登録」を選択
+Card <- EditActivity : 更新データを取得:getter
+deactivate
+database Realm order 40
+EditActivity ->Realm : 入力テキストを記録する:write
+Realm -> EditActivity: 記録データを読み込み:get
+EditActivity -> Card:更新データを更新 : setter
+deactivate EditActivity
+activate Card
+Card ->MainActivity:データを渡し
+deactivate
+MainActivity -> Application:更新反映
+activate Application
+Application -> MainActivity:override
+note left: 入力したデータを画面に反映する
+deactivate
+MainActivity -> ユーザー: カード管理画面に戻る
+deactivate
+
+@enduml
